@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Conheça a Bíblia — Bíblia Sagrada</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Fontes -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+  <!-- Seu CSS externo (mantido) -->
+  <link rel="stylesheet" href="css/estilo.css">
+
+  <!-- Pequenas correções locais: garantem navbar preta, texto visível e offset dinâmico -->
+  <style>
+    :root{
+      --navbar-bg: #000000;
+      --link-color: #ffffff;
+      --link-hover-bg: linear-gradient(90deg,#00d1ff,#6a6aff);
+    }
+
+    /* Garante que a navbar fique preta e com texto legível */
+    .navbar-tech{
+      background: var(--navbar-bg) !important;
+      color: var(--link-color) !important;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.55);
+      z-index: 1200;
+    }
+    .navbar-tech .navbar-brand, .navbar-tech .nav-link {
+      color: var(--link-color) !important;
+    }
+    .navbar-tech .nav-link:hover {
+      color: #02121a !important;
+      background: var(--link-hover-bg);
+      transform: translateY(-3px);
+      transition: all .16s ease;
+      border-radius: 8px;
+    }
+
+    /* Força ícone do toggler visível em temas escuros */
+    .navbar-toggler { border: 0; }
+    .navbar-toggler-icon { filter: invert(1) brightness(2); }
+
+    /* main-offset será ajustado dinamicamente via JS; definir um fallback seguro */
+    .main-offset { padding-top: 120px; transition: padding-top .12s ease; }
+
+    /* Pequeno style para manter legibilidade do título */
+    .hero-inner h1 { color: #ffffff; }
+
+    /* Mantém footer preto e texto branco (preservando seu rodapé) */
+    .site-footer { background:#000; color:#fff; }
+
+    /* Evita que CSS externo torne todo o site preto por engano (garante contraste nos textos principais) */
+    main, section, .card, .card-body { color: inherit; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV fixa no topo -->
+  <header>
+    <nav id="mainNavbar" class="navbar navbar-expand-lg fixed-top navbar-tech" aria-label="Navegação principal">
+      <div class="container" style="max-width:1200px;">
+        <a class="navbar-brand d-flex align-items-center" href="index.html">
+          <svg width="32" height="32" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <rect x="2" y="3" width="20" height="18" rx="3" fill="currentColor" opacity="0.08"></rect>
+            <path d="M7 8h10M7 12h10M7 16h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"></path>
+          </svg>
+          <span class="brand" style="margin-left:10px; font-weight:700; color:var(--link-color);">Bíblia Sagrada</span>
+        </a>
+
+        <button id="navbarToggler" class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                aria-controls="mainNav" aria-expanded="false" aria-label="Abrir menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="mainNav">
+          <ul class="navbar-nav align-items-lg-center">
+            <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#informacoes">Informações</a></li>
+            <li class="nav-item"><a class="nav-link" href="#galeria">Galeria</a></li>
+            <li class="nav-item"><a class="nav-link" href="#midia">Mídia</a></li>
+            <li class="nav-item"><a class="nav-link" href="versiculos.html">Versículos</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+
+  <!-- HOME -->
+  <div class="container" style="max-width:1200px;">
+        <div class="hero-inner" style="padding:2.25rem; border-radius:14px;">
+          <h1 id="home-title" style="font-family:'Playfair Display', serif; font-size:2.4rem; margin:0 0 .5rem;">Conheça a Bíblia</h1>
+          <p class="hero-sub" style="color: #cfd8e3; margin-bottom:1rem;">História, lugares e versículos apresentados com clareza e beleza.</p>
+          <a href="versiculos.html" class="btn btn-primary btn-cta" style="border-radius:10px; padding:.6rem 1rem;">Ver Versículos Inspiradores</a>
+        </div>
+</section>
+
+  
+
+    <!-- INFORMAÇÕES -->
+    <section id="informacoes" class="fade-in bg-white">
+      <div class="container py-5">
+        <h2 class="mb-4 text-center">Informações sobre a Bíblia</h2>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="card p-3 text-center">
+              <h5>A Bíblia</h5>
+              <p>É composta por 66 livros divididos entre Antigo e Novo Testamento.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card p-3 text-center">
+              <h5>Autores</h5>
+              <p>Foi escrita por mais de 40 autores ao longo de 1600 anos.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card p-3 text-center">
+              <h5>Traduções</h5>
+              <p>É o livro mais traduzido e distribuído do mundo.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALERIA -->
+    <section id="galeria" class="fade-in" style="background-color:#f4e9d8;">
+      <div class="container py-5">
+        <h2 class="mb-4 text-center">Galeria Bíblica</h2>
+        <div class="d-flex justify-content-end mb-3">
+          <label for="gallery-search" class="visually-hidden">Pesquisar galeria</label>
+          <input id="gallery-search" class="form-control w-50" type="search" placeholder="Pesquisar (ex.: Belém)" style="margin-right:8px;">
+          <button id="gallery-clear" class="btn btn-outline-secondary">Limpar</button>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="card h-100 text-center">
+              <img src="Images/Belem.jpeg" class="card-img-top" alt="Belém" loading="lazy">
+              <div class="card-body">
+                <h5 class="card-title">Belém</h5>
+                <p class="card-text">Cidade onde Jesus nasceu. <br><em>Lucas 2:4-7</em></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card h-100 text-center">
+              <img src="Images/Betânia.jpg" class="card-img-top" alt="Betânia" loading="lazy">
+              <div class="card-body">
+                <h5 class="card-title">Betânia</h5>
+                <p class="card-text">Local onde Jesus ressuscitou Lázaro. <br><em>João 11:1-44</em></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card h-100 text-center">
+              <img src="Images/Cafarnaum.jpg" class="card-img-top" alt="Cafarnaum" loading="lazy">
+              <div class="card-body">
+                <h5 class="card-title">Cafarnaum</h5>
+                <p class="card-text">Cidade onde Jesus realizou muitos milagres. <br><em>Mateus 8:5-13</em></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- restante das imagens preservadas -->
+          <div class="col-md-4">
+            <div class="card h-100 text-center">
+              <img src="Images/Gólgota.jfif" class="card-img-top" alt="Gólgota" loading="lazy">
+              <div class="card-body">
+                <h5 class="card-title">Gólgota</h5>
+                <p class="card-text">Monte onde Jesus foi crucificado. <br><em>João 19:17-18</em></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card h-100 text-center">
+              <img src="Images/Jericó.jfif" class="card-img-top" alt="Jericó" loading="lazy">
+              <div class="card-body">
+                <h5 class="card-title">Jericó</h5>
+                <p class="card-text">Jesus curou o cego Bartimeu nesta cidade. <br><em>Marcos 10:46-52</em></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card h-100 text-center">
+              <img src="Images/Jerusalem.jpg" class="card-img-top" alt="Jerusalém" loading="lazy">
+              <div class="card-body">
+                <h5 class="card-title">Jerusalém</h5>
+                <p class="card-text">Cidade onde Jesus foi crucificado e ressuscitou. <br><em>Lucas 24:1-7</em></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card h-100 text-center">
+              <img src="Images/mardagalileia.jpg" class="card-img-top" alt="Mar da Galileia" loading="lazy">
+              <div class="card-body">
+                <h5 class="card-title">Mar da Galileia</h5>
+                <p class="card-text">Jesus andou sobre as águas aqui. <br><em>Mateus 14:22-33</em></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card h-100 text-center">
+              <img src="Images/Monte das Oliveiras.jpg" class="card-img-top" alt="Monte das Oliveiras" loading="lazy">
+              <div class="card-body">
+                <h5 class="card-title">Monte das Oliveiras</h5>
+                <p class="card-text">Local da oração de Jesus antes da crucificação. <br><em>Lucas 22:39-46</em></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card h-100 text-center">
+              <img src="Images/Muro das Lamentações.jfif" class="card-img-top" alt="Muro das Lamentações" loading="lazy">
+              <div class="card-body">
+                <h5 class="card-title">Muro das Lamentações</h5>
+                <p class="card-text">Símbolo da fé judaica, próximo ao templo onde Jesus ensinava. <br><em>Lucas 19:45-48</em></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card h-100 text-center">
+              <img src="Images/Nazaré.jpeg" class="card-img-top" alt="Nazaré" loading="lazy">
+              <div class="card-body">
+                <h5 class="card-title">Nazaré</h5>
+                <p class="card-text">Cidade onde Jesus cresceu. <br><em>Lucas 2:39-40</em></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card h-100 text-center">
+              <img src="Images/rio-jordao-israel-.jpg" class="card-img-top" alt="Rio Jordão" loading="lazy">
+              <div class="card-body">
+                <h5 class="card-title">Rio Jordão</h5>
+                <p class="card-text">Jesus foi batizado por João Batista aqui. <br><em>Mateus 3:13-17</em></p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- MÍDIA -->
+    <section id="midia" class="fade-in bg-white">
+      <div class="container py-5">
+        <h2 class="mb-4 text-center">Vídeo sobre a Bíblia</h2>
+        <div class="ratio ratio-16x9">
+          <iframe id="yt-embed" data-src="https://www.youtube.com/embed/VIDEO_ID" title="Vídeo sobre a Bíblia" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- RODAPÉ preto -->
+  <footer class="site-footer bg-dark text-white py-5">
+    <div class="container" style="max-width:1200px;">
+      <p class="mb-1">Site desenvolvido em 2025 para Atividade Final de DSA1</p>
+      <p class="mb-1">Turma: INF1XT</p>
+      <p class="mb-2">Integrantes:</p>
+      <ul class="list-unstyled mb-0">
+        <li>° Beltrana, 1</li>
+        <li>° Fulano, 8</li>
+        <li>° Sicrana, 17</li>
+      </ul>
+      <p class="mt-3 small">© <span id="year"></span> Bíblia Sagrada — Uso educacional</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script>
+    // Inserir ano
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Carrega o vídeo quando o container aparece
+    (function(){
+      const iframe = document.getElementById('yt-embed');
+      if(!iframe) return;
+      const obs = new IntersectionObserver(entries=>{
+        entries.forEach(e => { if(e.isIntersecting){ iframe.src = iframe.dataset.src; obs.disconnect(); }});
+      }, {rootMargin: '300px'});
+      obs.observe(iframe);
+    })();
+
+    // Ajusta dinamicamente o padding-top do main para corresponder à altura real da navbar
+    (function(){
+      const navbar = document.getElementById('mainNavbar');
+      const main = document.getElementById('siteMain');
+
+      function setMainOffset(){
+        // usa getBoundingClientRect para pegar altura real (inclui bordas/padding)
+        const h = navbar.getBoundingClientRect().height;
+        // adiciona espaço extra para afastar título do menu (voce pediu mais distante)
+        const extra = 40; // ajuste: mais alto = mais distância
+        main.style.paddingTop = (h + extra) + 'px';
+      }
+
+      // executa no carregamento e no resize
+      setMainOffset();
+      window.addEventListener('resize', setMainOffset);
+
+      // também ajusta quando o menu colapsa/expande (para mobile)
+      const toggler = document.getElementById('navbarToggler');
+      if (toggler) {
+        toggler.addEventListener('click', () => {
+          // espera animação do colapso terminar
+          setTimeout(setMainOffset, 250);
+        });
+      }
+    })();
+
+    // Smooth scroll acessível
+    document.querySelectorAll('a.nav-link[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href');
+        const el = document.querySelector(id);
+        if(!el) return;
+        e.preventDefault();
+        el.tabIndex = -1;
+        el.focus({preventScroll:true});
+        window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 24, behavior: 'smooth' });
+      });
+    });
+
+    // Filtro simples da galeria
+    (function(){
+      const input = document.getElementById('gallery-search');
+      const clearBtn = document.getElementById('gallery-clear');
+      const cards = Array.from(document.querySelectorAll('#gallery-cards .col-md-4'));
+      function filter(q){
+        const term = (q||'').trim().toLowerCase();
+        cards.forEach(card => {
+          card.style.display = (!term || card.textContent.toLowerCase().includes(term)) ? '' : 'none';
+        });
+      }
+      input.addEventListener('input', ()=> filter(input.value));
+      clearBtn.addEventListener('click', ()=> { input.value=''; filter(''); input.focus(); });
+    })();
+  </script>
+</body>
+</html>
