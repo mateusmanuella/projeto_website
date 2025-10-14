@@ -1,330 +1,981 @@
 <!DOCTYPE html>
 <html lang="pt-BR" data-theme="dark">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Conheça a Bíblia</title>
 
+  <!-- SEO / Social -->
+  <meta name="description" content="Projeto DSA1 — Conheça a Bíblia: galeria, vídeo e versículos inspiradores." />
+  <meta property="og:title" content="Conheça a Bíblia" />
+  <meta property="og:description" content="Projeto DSA1 — galeria bíblica, vídeo e versículos. Feito por INF1XT." />
+  <meta property="og:image" content="Images/Belem.jpeg" />
+  <meta property="og:type" content="website" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 
   <!-- Fontes Google -->
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Playfair+Display:wght@700&display=swap"
+    rel="stylesheet" />
 
   <!-- CSS personalizado (mantive o link; você pode mover estilos para css/estilo.css) -->
   <link rel="stylesheet" href="css/estilo.css" />
 
   <style>
     /* Pequenas melhorias visuais sem alterar o layout das imagens */
-    :root { --bg-beige: #f4e9d8; --muted: #6c757d; }
-    body { font-family: "Merriweather", Georgia, serif; }
-    .hero { padding: 3.5rem 0; background: linear-gradient(180deg, rgba(13,110,253,0.04), transparent 60%); }
-    .card-img-top { object-fit: cover; height: 200px; }
-    .gallery-section { background-color: var(--bg-beige); }
-    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    :root {
+      --bg-beige: #f4e9d8;
+      --muted: #6c757d;
+    }
+
+    body {
+      font-family: "Merriweather", Georgia, serif;
+    }
+
+    .hero {
+      padding: 3.5rem 0;
+      background: linear-gradient(180deg, rgba(13, 110, 253, 0.04), transparent 60%);
+    }
+
+    .card-img-top {
+      object-fit: cover;
+      height: 200px;
+    }
+
+    .gallery-section {
+      background-color: var(--bg-beige);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
     /* Lightbox básico (invisível enquanto não usado) */
-    .lb-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 1080; }
-    .lb-backdrop.show { display:flex; }
-    .lb-img { max-width: 92vw; max-height: 88vh; border-radius: 6px; }
+    .lb-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1080;
+    }
+
+    .lb-backdrop.show {
+      display: flex;
+    }
+
+    .lb-img {
+      max-width: 92vw;
+      max-height: 88vh;
+      border-radius: 6px;
+    }
   </style>
 </head>
-<body>
 
-<!-- NAV -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Navegação principal">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="index.html">Bíblia Sagrada</a>
-    <div class="d-flex align-items-center ms-3">
-      <button id="themeToggle" class="theme-toggle" aria-pressed="false" title="Alternar tema (luz/escuro)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="currentColor"></path></svg>
-        <span class="sr-only">Alternar tema</span>
+<body>
+  <a class="skip-link" href="#home">Pular para conteúdo</a>
+  <!-- NAV -->
+  <!-- NAV -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Navegação principal">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">Bíblia Sagrada</a>
+      <div class="d-flex align-items-center ms-3">
+        <button id="themeToggle" class="theme-toggle" aria-pressed="false" title="Alternar tema (luz/escuro)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="currentColor"></path>
+          </svg>
+          <span class="sr-only">Alternar tema</span>
+        </button>
+      </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar menu">
+        <span class="navbar-toggler-icon"></span>
       </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#informacoes">Informações</a></li>
+          <li class="nav-item"><a class="nav-link" href="#galeria">Galeria</a></li>
+          <li class="nav-item"><a class="nav-link" href="#midia">Mídia / Mapa</a></li>
+          <li class="nav-item"><a class="nav-link" href="versiculos.html">Versículos</a></li>
+          <li class="nav-item"><a class="nav-link" href="feedback.html">Feedback</a></li>
+        </ul>
+        <form id="site-search" class="d-flex ms-3 align-items-center" role="search" aria-label="Pesquisar site">
+          <label for="gallery-search" class="sr-only">Pesquisar</label>
+          <div class="input-group input-group-sm">
+            <input id="gallery-search" class="form-control" type="search" placeholder="Pesquisar..."
+              aria-label="Pesquisar" />
+          </div>
+          <button id="gallery-clear" type="button" class="btn btn-outline-light btn-sm ms-2">Limpar</button>
+          <button id="import-favs" type="button" class="btn btn-outline-light btn-sm ms-2"
+            title="Importar favoritos">Importar favoritos</button>
+          <div id="search-count" class="ms-2 text-warning small" aria-live="polite"></div>
+        </form>
+      </div>
     </div>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar menu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#informacoes">Informações</a></li>
-        <li class="nav-item"><a class="nav-link" href="#galeria">Galeria</a></li>
-        <li class="nav-item"><a class="nav-link" href="#midia">Mídia / Mapa</a></li>
-        <li class="nav-item"><a class="nav-link" href="versiculos.html">Versículos</a></li>
+  </nav>
+
+  <!-- site frame (LED) -->
+  <div class="site-shell" aria-label="Conteúdo do site">
+
+    <!-- HOME -->
+    <section id="home" class="hero text-center" tabindex="-1" aria-labelledby="home-title">
+      <div class="container py-5">
+        <div class="intro">
+          <h1 id="home-title" class="mb-4">Conheça a Bíblia</h1>
+          <p>Descubra a história, os ensinamentos e os personagens que marcaram a fé cristã.</p>
+          <a href="versiculos.html" class="btn btn-primary mt-3">Ver Versículos Inspiradores</a>
+          <a href="livros-da-biblia.html" class="btn btn-primary">Ver Livros da Bíblia</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- INFORMAÇÕES -->
+    <section id="informacoes" class="fade-in bg-white">
+      <div class="container py-5">
+        <h2 class="mb-4 text-center">Informações sobre a Bíblia</h2>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="card p-3 text-center">
+              <h5>A Bíblia</h5>
+              <p>É composta por 66 livros divididos entre Antigo e Novo Testamento.</p>
+              <p>A Bíblia é um conjunto de livros sagrados do cristianismo.</p>
+              <p>Dividida em Antigo e Novo Testamento, contém histórias, leis e ensinamentos.</p>
+              <p>O Antigo Testamento narra a criação, os profetas e a história de Israel.</p>
+              <p>O Novo Testamento foca na vida, morte e ressurreição de Jesus Cristo.</p>
+              <p>É considerada a palavra de Deus revelada à humanidade.</p>
+              <p>Inspirou milhões ao longo dos séculos com fé, ética e esperança.</p>
+              <p>Traduzida para milhares de idiomas, é o livro mais lido do mundo.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card p-3 text-center">
+              <h5>autores</h5>
+              
+<p>A Bíblia foi escrita por mais de 40 autores ao longo de 1600 anos.</p>
+<p>Entre eles estavam reis, profetas, pescadores, pastores e médicos.</p>
+<p>Moisés escreveu o Pentateuco; Davi compôs muitos Salmos.</p>
+<p>Salomão deixou Provérbios, Eclesiastes e Cantares.</p>
+<p>Os evangelhos foram registrados por Mateus, Marcos, Lucas e João.</p>
+<p>Paulo contribuiu com diversas cartas às igrejas do Novo Testamento.</p>
+<p>Apesar de diferentes origens, todos compartilharam a mesma fé e propósito.</p>
+<p>Todos foram inspirados por Deus para transmitir sua mensagem ao mundo.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card p-3 text-center">
+              <h5>Traduções</h5>
+              <p>É o livro mais traduzido e distribuído do mundo.</p>
+              <p>Traduzida para mais de 3.000 idiomas e dialetos.</p>
+              <p>Inclui versões completas e parciais em diversas línguas.</p>
+              <p>A Septuaginta foi a primeira tradução, do hebraico para o grego.</p>
+              <p>A Vulgata, em latim, foi usada por séculos na Igreja Católica.</p>
+              <p>Hoje há traduções modernas como NVI, ARA e King James.</p>
+              <p>As traduções buscam fidelidade ao texto original e clareza ao leitor.</p>
+              <p>Elas tornam a mensagem acessível a diferentes culturas e gerações.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIS INFORMAÇÕES (cards adicionais) -->
+    <section id="mais-informacoes" class="fade-in bg-white">
+      <div class="container py-5">
+        <h2 class="mb-4 text-center">Mais sobre a Bíblia</h2>
+        <div class="info-grid">
+          <article class="card info-card card-led" tabindex="0" role="article"
+            data-detail="A formação da Bíblia envolveu processos históricos e debates sobre quais escritos seriam incluídos no cânon.">
+            <img src="Images/Biblia.jfif" alt="Contexto histórico" />
+            <div class="card-body">
+              <h5>A Formação</h5>
+            <p>Os textos bíblicos surgiram em épocas diferentes.</p>
+<p>Alguns foram escritos em tempos de guerra, outros em paz.</p>
+<p>Foram preservados por escribas e líderes religiosos.</p>
+<p>Copiados manualmente com extremo cuidado por séculos.</p>
+<p>O cânon foi definido por critérios de fé e tradição.</p>
+<p>Livros apócrifos foram deixados fora por decisão teológica.</p>
+<p>A ordem dos livros varia entre tradições cristãs e judaicas.</p>
+<p>Descobertas arqueológicas reforçam sua autenticidade.</p>
+            </div>
+          </article>
+
+          <article class="card info-card card-led" tabindex="0" role="article"
+            data-detail="Manuscritos antigos preservam variações textuais; sua comparação é vital para estudos críticos do texto.">
+            <img src="Images/Manuscritos.jfif" alt="Manuscritos antigos" />
+            <div class="card-body">
+              <h5>Manuscritos</h5>
+              <p>Importância dos manuscritos hebraicos, gregos e das traduções antigas.</p>
+            </div>
+          </article>
+
+          <article class="card info-card card-led" tabindex="0" role="article"
+            data-detail="O contexto geográfico ajuda a entender eventos e referências culturais nas narrativas bíblicas.">
+            <img src="Images/ContextoGeografico.jfif" alt="Contexto geográfico" />
+            <div class="card-body">
+              <h5>Contexto Geográfico</h5>
+              <p>Locais-chave e seu papel nas narrativas bíblicas.</p>
+            </div>
+          </article>
+
+          <article class="card info-card card-led" tabindex="0" role="article"
+            data-detail="Tradições comunitárias e litúrgicas moldam como os textos são lidos e aplicados ao longo do tempo.">
+            <img src="Images/Tradicoes.jfif" alt="Tradições" />
+            <div class="card-body">
+              <h5>Tradições</h5>
+              <p>Como tradições religiosas influenciam a interpretação dos textos.</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- TEMAS IMPORTANTES (cards com imagens e vídeos) -->
+    <section id="temas" class="fade-in">
+      <div class="container py-5">
+        <h2 class="mb-4 text-center">Temas importantes</h2>
+        <div class="gallery-grid">
+          <article class="gallery-card card-led card-media" data-title="Parábolas"
+            data-detail="Parábolas são histórias curtas que transmitem verdades morais e espirituais de maneira acessível."
+            tabindex="0">
+            <img src="Images/parabola.jfif" alt="Parábolas" loading="lazy">
+            <div class="gallery-caption">Parábolas — <em>Histórias com lição moral</em></div>
+          </article>
+
+          <article class="gallery-card card-led card-media" data-title="Milagres"
+            data-detail="Milagres são eventos descritos como intervenções divinas que reforçam fé e mensagem dos textos."
+            tabindex="0">
+            <img src="Images/Milagres.jfif" alt="Milagres" loading="lazy">
+            <div class="gallery-caption">Milagres — <em>Eventos extraordinários</em></div>
+          </article>
+
+          <article class="gallery-card card-led card-media" data-video-id="ckVR3YJUTXY" data-title="Introdução Vídeo"
+            data-detail="Vídeo introdutório cobrindo pontos-chave sobre a Bíblia e seu impacto histórico." tabindex="0">
+            <img src="Images/IntroucaoABiblia.jfif" alt="Vídeo: Introdução" loading="lazy">
+            <div class="gallery-caption">Vídeo: Introdução — <em>Clique para assistir</em></div>
+          </article>
+
+          <article class="gallery-card card-led card-media" data-video-id="ckVR3YJUTXY" data-title="A Vida de Jesus"
+            data-detail="Resumo dos eventos centrais da vida de Jesus, incluindo ensino, milagres e ressurreição."
+            tabindex="0">
+            <img src="Images/VidadeCristo.jfif" alt="A Vida de Jesus" loading="lazy">
+            <div class="gallery-caption">A Vida de Jesus — <em>Clique para ver</em></div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CRONOLOGIA -->
+    <section id="cronologia" class="fade-in bg-white">
+      <div class="container py-5">
+        <h2 class="mb-4 text-center">Cronologia Bíblica</h2>
+        <div class="info-grid">
+          <article class="info-card card-led" tabindex="0"><img src="Images/Patriarcas.jfif" alt="Patriarcas">
+            <div class="card-body">
+              <h5>Patriarcas</h5>
+              <p>Abraão, Isaque e Jacó — início das promessas.</p>
+            </div>
+          </article>
+          <article class="info-card card-led" tabindex="0"><img src="Images/Moises.jfif" alt="Êxodo">
+            <div class="card-body">
+              <h5>Êxodo</h5>
+              <p>Moises liderando a saída do Egito.</p>
+            </div>
+          </article>
+          <article class="info-card card-led" tabindex="0"><img src="Images/Reinos.jfif" alt="Reinos">
+            <div class="card-body">
+              <h5>Reinos</h5>
+              <p>Período dos reinos de Israel e Judá.</p>
+            </div>
+          </article>
+          <article class="info-card card-led" tabindex="0"><img src="Images/mar-da-galileia.jpg" alt="Vida de Jesus">
+            <div class="card-body">
+              <h5>Vida de Jesus</h5>
+              <p>Ministério, milagres e ensinamentos.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PERSONAGENS -->
+    <section id="personagens" class="fade-in">
+      <div class="container py-5">
+        <h2 class="mb-4 text-center">Personagens Importantes</h2>
+        <div class="gallery-grid">
+          <article class="gallery-card card-led" data-title="Jesus"
+            data-detail="Jesus é a figura central do Novo Testamento. Seus ensinamentos, parábolas e sacrifício na cruz são a base da fé cristã."
+            tabindex="0">
+            <img src="Images/golgota.jfif" alt="Jesus" loading="lazy">
+            <div class="gallery-caption">Jesus — Figura central; seus ensinamentos e sacrifício moldaram o cristianismo.
+            </div>
+          </article>
+
+          <article class="gallery-card card-led" data-title="Maria"
+            data-detail="Maria, mãe de Jesus, é venerada por sua humildade e obediência; muitas tradições a consideram modelo de fé."
+            tabindex="0">
+            <img src="Images/nazare.jpeg" alt="Maria" loading="lazy">
+            <div class="gallery-caption">Maria — Mãe de Jesus; exemplo de fé e devoção na tradição cristã.</div>
+          </article>
+
+          <article class="gallery-card card-led" data-title="Moisés"
+            data-detail="Moisés liderou o êxodo e recebeu a lei no Monte Sinai; é uma das figuras mais influentes do Antigo Testamento."
+            tabindex="0">
+            <img src="Images/jerico.jfif" alt="Moisés" loading="lazy">
+            <div class="gallery-caption">Moisés — Líder que conduziu Israel na saída do Egito e recebeu os Dez
+              Mandamentos.</div>
+          </article>
+
+          <article class="gallery-card card-led" data-title="Davi"
+            data-detail="Davi foi rei de Israel e autor de salmos; sua vida mistura liderança, poesia e conflitos pessoais que inspiram estudos teológicos."
+            tabindex="0">
+            <img src="Images/muro-das-lamentacoes.jfif" alt="Davi" loading="lazy">
+            <div class="gallery-caption">Davi — Rei e poeta; autor de muitos salmos e figura importante da monarquia.
+            </div>
+          </article>
+
+          <article class="gallery-card card-led" data-title="Paulo"
+            data-detail="Paulo viajou extensivamente e escreveu cartas aos primeiros cristãos; sua teologia moldou grande parte do pensamento cristão."
+            tabindex="0">
+            <img src="Images/Belem.jpeg" alt="Paulo" loading="lazy">
+            <div class="gallery-caption">Paulo — Apóstolo missionário; escreveu cartas que influenciam a teologia
+              cristã.</div>
+          </article>
+
+          <article class="gallery-card card-led" data-title="Pedro"
+            data-detail="Pedro, um dos doze discípulos, foi uma das principais lideranças da igreja primitiva e figura-chave nos evangelhos."
+            tabindex="0">
+            <img src="Images/Cafarnaum.jpg" alt="Pedro" loading="lazy">
+            <div class="gallery-caption">Pedro — Discípulo próximo de Jesus; liderança na igreja primitiva.</div>
+          </article>
+
+          <article class="gallery-card card-led" data-title="Maria Madalena"
+            data-detail="Maria Madalena é lembrada como seguidora dedicada de Jesus e testemunha da ressurreição; sua figura ganhou atenção em estudos históricos."
+            tabindex="0">
+            <img src="Images/monte-das-oliveiras.jpg" alt="Maria Madalena" loading="lazy">
+            <div class="gallery-caption">Maria Madalena — Seguidora de Jesus; presente em momentos-chave da narrativa
+              evangélica.</div>
+          </article>
+
+          <article class="gallery-card card-led" data-title="Ester"
+            data-detail="Ester foi rainha e agiu com coragem para proteger seu povo; sua história inspira reflexões sobre liderança e coragem."
+            tabindex="0">
+            <img src="Images/jerusalem.jpg" alt="Ester" loading="lazy">
+            <div class="gallery-caption">Ester — Rainha que salvou seu povo; símbolo de coragem e intercessão.</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+   
+
+  </div>
+
+    </section>
+
+    <!-- ESTUDOS E RECURSOS -->
+    <section id="estudos" class="fade-in">
+      <div class="container py-5">
+        <h2 class="mb-4 text-center">Estudos & Recursos</h2>
+        <div class="gallery-grid">
+          <article class="gallery-card card-led card-media" data-title="Guia de Estudo" tabindex="0"><img
+              src="Images/mar-da-galileia.jpg" alt="Guia de Estudo">
+            <div class="gallery-caption">Guia de Estudo — Baixe o material.</div>
+          </article>
+          <article class="gallery-card card-led card-media" data-title="Mapas Bíblicos" tabindex="0"><img
+              src="Images/monte-das-oliveiras.jpg" alt="Mapas Bíblicos">
+            <div class="gallery-caption">Mapas — Explore locais históricos.</div>
+          </article>
+          <article class="gallery-card card-led card-media" data-title="Comparativo de Traduções" tabindex="0"><img
+              src="Images/rio-jordao-israel.jpg" alt="Comparativo">
+            <div class="gallery-caption">Comparativo — Variações entre traduções.</div>
+          </article>
+          <article class="gallery-card card-led card-media" data-title="Estudos em vídeo" data-video-id="ckVR3YJUTXY"
+            tabindex="0"><img src="Images/belem.jpeg" alt="Estudos em vídeo">
+            <div class="gallery-caption">Estudos em vídeo — Assista aulas curtas.</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FIM DO SITE SHELL -->
+  </div>
+
+  <!-- hidden file input for importing favorites -->
+  <input id="import-favs-input" type="file" accept="application/json" style="display:none" aria-hidden="true" />
+
+  <!-- toast container -->
+  <div id="toasts" aria-live="polite" aria-atomic="true"
+    style="position:fixed;right:18px;top:18px;z-index:2000;display:flex;flex-direction:column;gap:8px"></div>
+
+  <!-- GALERIA (com barra de pesquisa e imagens originais restauradas) -->
+  <section id="galeria" class="gallery-section fade-in">
+    <div class="container py-5">
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-start mb-3 gap-3">
+        <h2 class="mb-0 text-center">Galeria Bíblica</h2>
+        <!-- pesquisa movida para a navbar -->
+      </div>
+
+      <div id="gallery-cards" class="gallery-grid">
+        <!-- Gallery cards gerados estaticamente; classes modernas aplicadas -->
+        <article class="gallery-card" data-title="Belém">
+          <picture>
+            <img src="Images/Belem.jpeg" alt="Belém" loading="lazy">
+          </picture>
+          <div class="gallery-caption">Belém — <em>Lucas 2:4-7</em></div>
+        </article>
+
+        <article class="gallery-card" data-title="Betânia">
+          <picture>
+            <img src="Images/betania.jpg" alt="Betânia" loading="lazy">
+          </picture>
+          <div class="gallery-caption">Betânia — <em>João 11:1-44</em></div>
+        </article>
+
+        <article class="gallery-card" data-title="Cafarnaum">
+          <picture>
+            <img src="Images/Cafarnaum.jpg" alt="Cafarnaum" loading="lazy">
+          </picture>
+          <div class="gallery-caption">Cafarnaum — <em>Mateus 8:5-13</em></div>
+        </article>
+
+        <article class="gallery-card" data-title="Gólgota">
+          <picture>
+            <img src="Images/golgota.jfif" alt="Gólgota" loading="lazy">
+          </picture>
+          <div class="gallery-caption">Gólgota — <em>João 19:17-18</em></div>
+        </article>
+
+        <article class="gallery-card" data-title="Jericó">
+          <picture>
+            <img src="Images/jerico.jfif" alt="Jericó" loading="lazy">
+          </picture>
+          <div class="gallery-caption">Jericó — <em>Marcos 10:46-52</em></div>
+        </article>
+
+        <article class="gallery-card" data-title="Jerusalém">
+          <picture>
+            <img src="Images/Jerusalem.jpg" alt="Jerusalém" loading="lazy">
+          </picture>
+          <div class="gallery-caption">Jerusalém — <em>Lucas 24:1-7</em></div>
+        </article>
+
+        <article class="gallery-card" data-title="Mar da Galileia">
+          <picture>
+            <img src="Images/mar-da-galileia.jpg" alt="Mar da Galileia" loading="lazy">
+          </picture>
+          <div class="gallery-caption">Mar da Galileia — <em>Mateus 14:22-33</em></div>
+        </article>
+
+        <article class="gallery-card" data-title="Monte das Oliveiras">
+          <picture>
+            <img src="Images/monte-das-oliveiras.jpg" alt="Monte das Oliveiras" loading="lazy">
+          </picture>
+          <div class="gallery-caption">Monte das Oliveiras — <em>Lucas 22:39-46</em></div>
+        </article>
+
+        <article class="gallery-card" data-title="Muro das Lamentações">
+          <picture>
+            <img src="Images/muro-das-lamentacoes.jfif" alt="Muro das Lamentações" loading="lazy">
+          </picture>
+          <div class="gallery-caption">Muro das Lamentações — <em>Lucas 19:45-48</em></div>
+        </article>
+
+        <article class="gallery-card" data-title="Nazaré">
+          <picture>
+            <img src="Images/nazare.jpeg" alt="Nazaré" loading="lazy">
+          </picture>
+          <div class="gallery-caption">Nazaré — <em>Lucas 2:39-40</em></div>
+        </article>
+
+        <article class="gallery-card" data-title="Rio Jordão">
+          <picture>
+            <img src="Images/rio-jordao-israel.jpg" alt="Rio Jordão" loading="lazy">
+          </picture>
+          <div class="gallery-caption">Rio Jordão — <em>Mateus 3:13-17</em></div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- MÍDIA -->
+  <!-- MÍDIA -->
+  <section id="midia" class="fade-in bg-white">
+    <div class="container py-5">
+      <h2 class="mb-4 text-center">Vídeo sobre a Bíblia</h2>
+
+      <div class="video-card led-frame" id="video-card" role="button" aria-label="Abrir vídeo sobre a Bíblia"
+        data-video-id="ckVR3YJUTXY" data-thumb="https://i.ytimg.com/vi/ckVR3YJUTXY/maxresdefault.jpg">
+        <!-- Lite embed: thumbnail do YouTube é usada aqui; iframe será injetado ao abrir -->
+        <img src="Images/Belem.jpeg" alt="Thumbnail do vídeo" class="video-thumb" id="video-thumb">
+        <div class="play-overlay">
+          <div class="play-button" aria-hidden="true">
+            <!-- Ícone play -->
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M8 5v14l11-7z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Lightbox do vídeo -->
+  <div id="video-lightbox" aria-hidden="true" role="dialog" aria-label="Janela do vídeo">
+    <div class="video-modal" role="document">
+      <div class="video-wrapper">
+        <!-- iframe fornecido pelo usuário; autoplay será controlado pelo script ao abrir -->
+        <iframe id="video-iframe" src="https://www.youtube.com/embed/ckVR3YJUTXY?si=wnjfsX2AsKD-bK7m&amp;rel=0"
+          title="YouTube video player" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+      <div class="video-footer">
+        <button id="close-video" class="close-video-btn">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RODAPÉ -->
+  <section id="rodape" class="p-5 bg-dark text-white text-center">
+    <div class="container">
+      <p>Site desenvolvido em 2025 para Atividade Final de DSA1</p>
+      <p>Turma: INF1FT</p>
+      <p>Integrantes:</p>
+      <ul class="list-unstyled">
+        <li>° Erick, 1</li>
+        <li>° Gediane Terlesqui França, 8</li>
+        <li>° Mateus Paes Alves, 27</li>
       </ul>
     </div>
-  </div>
-</nav>
+  </section>
 
-<!-- HOME -->
-<section id="home" class="hero text-center" tabindex="-1" aria-labelledby="home-title">
-  <div class="container py-5">
-    <div class="intro">
-      <h1 id="home-title" class="mb-4">Conheça a Bíblia</h1>
-      <p>Descubra a história, os ensinamentos e os personagens que marcaram a fé cristã.</p>
-      <a href="versiculos.html" class="btn btn-primary mt-3">Ver Versículos Inspiradores</a>
-    </div>
-  </div>
-</section>
-
-<!-- INFORMAÇÕES -->
-<section id="informacoes" class="fade-in bg-white">
-  <div class="container py-5">
-    <h2 class="mb-4 text-center">Informações sobre a Bíblia</h2>
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="card p-3 text-center">
-          <h5>A Bíblia</h5>
-          <p>É composta por 66 livros divididos entre Antigo e Novo Testamento.</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card p-3 text-center">
-          <h5>Autores</h5>
-          <p>Foi escrita por mais de 40 autores ao longo de 1600 anos.</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card p-3 text-center">
-          <h5>Traduções</h5>
-          <p>É o livro mais traduzido e distribuído do mundo.</p>
-        </div>
+  <!-- Lightbox simples (usa as mesmas imagens originais quando clicadas) -->
+  <div id="lightbox" class="lb-backdrop" role="dialog" aria-hidden="true" aria-label="Visualizador de imagens">
+    <div class="lb-content text-center" role="document">
+      <button id="lb-prev" class="btn btn-sm btn-outline-light me-2" aria-label="Imagem anterior">←</button>
+      <img id="lb-image" class="lb-img" src="" alt="">
+      <button id="lb-next" class="btn btn-sm btn-outline-light ms-2" aria-label="Próxima imagem">→</button>
+      <div class="mt-2 d-flex justify-content-center gap-2 align-items-center">
+        <div id="lb-caption" class="text-white"></div>
+        <button id="lb-close" class="btn btn-sm btn-danger">Fechar</button>
       </div>
     </div>
   </div>
-</section>
 
-<!-- GALERIA (com barra de pesquisa e imagens originais restauradas) -->
-<section id="galeria" class="gallery-section fade-in">
-  <div class="container py-5">
-    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start mb-3 gap-3">
-      <h2 class="mb-0 text-center">Galeria Bíblica</h2>
-      <div class="d-flex gap-2" role="search" aria-label="Pesquisar galeria">
-        <label for="gallery-search" class="sr-only">Pesquisar galeria</label>
-        <input id="gallery-search" type="search" class="form-control" placeholder="Pesquisar local (ex.: Belém)" />
-        <button id="gallery-clear" class="btn btn-outline-secondary" type="button">Limpar</button>
+  <!-- Detail modal (reutilizável) -->
+  <div id="detail-modal" class="lb-backdrop" role="dialog" aria-hidden="true" aria-label="Detalhe do card">
+    <div class="lb-content card p-3" role="document">
+      <h3 id="detail-title"></h3>
+      <p id="detail-body"></p>
+      <p class="text-center"><a id="detail-source" class="btn btn-sm btn-secondary" target="_blank" rel="noopener">Fonte
+          / Ler mais</a></p>
+      <div class="d-flex justify-content-center mt-3"><button id="detail-close" class="btn btn-danger">Fechar</button>
       </div>
     </div>
-
-    <div id="gallery-cards" class="gallery-grid">
-      <!-- Gallery cards gerados estaticamente; classes modernas aplicadas -->
-      <article class="gallery-card" data-title="Belém">
-        <img src="Images/belem.jpeg" alt="Belém" loading="lazy">
-        <div class="gallery-caption">Belém — <em>Lucas 2:4-7</em></div>
-      </article>
-
-      <article class="gallery-card" data-title="Betânia">
-        <img src="Images/betania.jpg" alt="Betânia" loading="lazy">
-        <div class="gallery-caption">Betânia — <em>João 11:1-44</em></div>
-      </article>
-
-      <article class="gallery-card" data-title="Cafarnaum">
-        <img src="Images/cafarnaum.jpg" alt="Cafarnaum" loading="lazy">
-        <div class="gallery-caption">Cafarnaum — <em>Mateus 8:5-13</em></div>
-      </article>
-
-      <article class="gallery-card" data-title="Gólgota">
-        <img src="Images/golgota.jfif" alt="Gólgota" loading="lazy">
-        <div class="gallery-caption">Gólgota — <em>João 19:17-18</em></div>
-      </article>
-
-      <article class="gallery-card" data-title="Jericó">
-        <img src="Images/jerico.jfif" alt="Jericó" loading="lazy">
-        <div class="gallery-caption">Jericó — <em>Marcos 10:46-52</em></div>
-      </article>
-
-      <article class="gallery-card" data-title="Jerusalém">
-        <img src="Images/jerusalem.jpg" alt="Jerusalém" loading="lazy">
-        <div class="gallery-caption">Jerusalém — <em>Lucas 24:1-7</em></div>
-      </article>
-
-      <article class="gallery-card" data-title="Mar da Galileia">
-        <img src="Images/mar-da-galileia.jpg" alt="Mar da Galileia" loading="lazy">
-        <div class="gallery-caption">Mar da Galileia — <em>Mateus 14:22-33</em></div>
-      </article>
-
-      <article class="gallery-card" data-title="Monte das Oliveiras">
-        <img src="Images/monte-das-oliveiras.jpg" alt="Monte das Oliveiras" loading="lazy">
-        <div class="gallery-caption">Monte das Oliveiras — <em>Lucas 22:39-46</em></div>
-      </article>
-
-      <article class="gallery-card" data-title="Muro das Lamentações">
-        <img src="Images/muro-das-lamentacoes.jfif" alt="Muro das Lamentações" loading="lazy">
-        <div class="gallery-caption">Muro das Lamentações — <em>Lucas 19:45-48</em></div>
-      </article>
-
-      <article class="gallery-card" data-title="Nazaré">
-        <img src="Images/nazare.jpeg" alt="Nazaré" loading="lazy">
-        <div class="gallery-caption">Nazaré — <em>Lucas 2:39-40</em></div>
-      </article>
-
-      <article class="gallery-card" data-title="Rio Jordão">
-        <img src="Images/rio-jordao-israel.jpg" alt="Rio Jordão" loading="lazy">
-        <div class="gallery-caption">Rio Jordão — <em>Mateus 3:13-17</em></div>
-      </article>
-
-    </div>
   </div>
-</section>
 
-<!-- MÍDIA -->
-<!-- MÍDIA -->
-<section id="midia" class="fade-in bg-white">
-  <div class="container py-5">
-    <h2 class="mb-4 text-center">Vídeo sobre a Bíblia</h2>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    /* =========================
+       Script principal (organizado)
+       - Controles de tema
+       - Lightbox de imagens (galeria)
+       - Lightbox de vídeo (player)
+       - Busca simples na galeria
+       A preocupação foi: acessibilidade, performance e comentários.
+       ========================= */
 
-    <div class="video-card led-frame" id="video-card" role="button" aria-label="Abrir vídeo sobre a Bíblia">
-      <!-- Thumbnail: pode ser uma imagem representativa disponível em Images/ ou criar uma miniatura com CSS -->
-  <img src="Images/belem.jpeg" alt="Thumbnail do vídeo" class="video-thumb">
-      <div class="play-overlay">
-        <div class="play-button" aria-hidden="true">
-          <!-- Ícone play -->
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M8 5v14l11-7z"></path>
-          </svg>
-        </div>
-      </div>
-    </div>
+    (() => {
+      'use strict';
 
-  </div>
-</section>
+      /* ---------- helpers ---------- */
+      const $ = sel => document.querySelector(sel);
+      const $$ = sel => Array.from(document.querySelectorAll(sel));
 
-<!-- Lightbox do vídeo -->
-<div id="video-lightbox" aria-hidden="true" role="dialog" aria-label="Janela do vídeo">
-  <div class="video-modal" role="document">
-    <div class="video-wrapper">
-      <!-- iframe fornecido pelo usuário; autoplay será controlado pelo script ao abrir -->
-      <iframe id="video-iframe" src="https://www.youtube.com/embed/ckVR3YJUTXY?si=wnjfsX2AsKD-bK7m&amp;rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    </div>
-    <div class="video-footer">
-      <button id="close-video" class="close-video-btn">Fechar</button>
-    </div>
-  </div>
-</div>
+      /* ---------- theme toggle ---------- */
+      const themeToggle = $('#themeToggle');
+      const htmlEl = document.documentElement;
+      const currentTheme = localStorage.getItem('theme') || 'dark';
+      htmlEl.setAttribute('data-theme', currentTheme);
+      themeToggle.setAttribute('aria-pressed', currentTheme === 'dark' ? 'false' : 'true');
 
-<!-- RODAPÉ -->
-<section id="rodape" class="p-5 bg-dark text-white text-center">
-  <div class="container">
-    <p>Site desenvolvido em 2025 para Atividade Final de DSA1</p>
-    <p>Turma: INF1FT</p>
-    <p>Integrantes:</p>
-    <ul class="list-unstyled">
-      <li>° Erick, 1</li>
-      <li>° Gediane Terlesqui França, 8</li>
-      <li>° Mateus Paes Alves, 27</li>
-    </ul>
-  </div>
-</section>
+      function toggleTheme() {
+        const next = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        htmlEl.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        themeToggle.setAttribute('aria-pressed', next === 'dark' ? 'false' : 'true');
+      }
+      themeToggle.addEventListener('click', toggleTheme);
 
-<!-- Lightbox simples (usa as mesmas imagens originais quando clicadas) -->
-<div id="lightbox" class="lb-backdrop" role="dialog" aria-hidden="true">
-  <div class="text-center">
-    <img id="lb-image" class="lb-img" src="" alt="">
-    <div class="mt-2">
-      <button id="lb-close" class="btn btn-sm btn-danger">Fechar</button>
-    </div>
-  </div>
-</div>
+      /* smooth navigation for in-page anchors */
+      $$("a.nav-link[href^='#']").forEach(a => a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        const target = document.querySelector(id);
+        if (!target) return;
+        e.preventDefault();
+        target.tabIndex = -1; target.focus({ preventScroll: true });
+        window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - 70, behavior: 'smooth' });
+      }));
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-/* =========================
-   Script principal (organizado)
-   - Controles de tema
-   - Lightbox de imagens (galeria)
-   - Lightbox de vídeo (player)
-   - Busca simples na galeria
-   A preocupação foi: acessibilidade, performance e comentários.
-   ========================= */
+      /* ---------- gallery lightbox ---------- */
+      const lb = $('#lightbox');
+      const lbImg = $('#lb-image');
+      const lbClose = $('#lb-close');
+      const lbPrev = $('#lb-prev');
+      const lbNext = $('#lb-next');
+      const lbCaption = $('#lb-caption');
 
-(() => {
-  'use strict';
+      // gallery items state
+      const galleryItems = [];
+      let currentIndex = -1;
+      let lastActiveElement = null;
 
-  /* ---------- helpers ---------- */
-  const $ = sel => document.querySelector(sel);
-  const $$ = sel => Array.from(document.querySelectorAll(sel));
+      // Build gallery index and attach handlers
+      $$('.gallery-card').forEach((card, i) => {
+        const img = card.querySelector('img');
+        const src = img.currentSrc || img.src;
+        const alt = img.alt || '';
+        const title = card.dataset.title || '';
+        galleryItems.push({ src, alt, title, card });
 
-  /* ---------- theme toggle ---------- */
-  const themeToggle = $('#themeToggle');
-  const htmlEl = document.documentElement;
-  const currentTheme = localStorage.getItem('theme') || 'dark';
-  htmlEl.setAttribute('data-theme', currentTheme);
-  themeToggle.setAttribute('aria-pressed', currentTheme === 'dark' ? 'false' : 'true');
+        // click / keyboard to open
+        card.addEventListener('click', () => openImageAt(i));
+        card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openImageAt(i); } });
+        card.tabIndex = 0; // make focusable
+      });
 
-  function toggleTheme(){
-    const next = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    htmlEl.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
-    themeToggle.setAttribute('aria-pressed', next === 'dark' ? 'false' : 'true');
-  }
-  themeToggle.addEventListener('click', toggleTheme);
+      // focus trap utilities
+      function getFocusable(container) {
+        const nodes = Array.from(container.querySelectorAll('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'));
+        return nodes.filter(n => n.offsetParent !== null);
+      }
 
-  /* smooth navigation for in-page anchors */
-  $$("a.nav-link[href^='#']").forEach(a => a.addEventListener('click', e => {
-    const id = a.getAttribute('href');
-    const target = document.querySelector(id);
-    if(!target) return;
-    e.preventDefault();
-    target.tabIndex = -1; target.focus({preventScroll:true});
-    window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - 70, behavior: 'smooth' });
-  }));
+      function openImageAt(index) {
+        if (index < 0 || index >= galleryItems.length) return;
+        currentIndex = index;
+        const it = galleryItems[index];
+        lbImg.src = it.src; lbImg.alt = it.alt || '';
 
-  /* ---------- gallery lightbox ---------- */
-  const lb = $('#lightbox');
-  const lbImg = $('#lb-image');
-  const lbClose = $('#lb-close');
+        // Caption fallback: data-title -> .gallery-caption text -> alt
+        const captionFromCard = it.card.querySelector('.gallery-caption')?.textContent?.trim();
+        const captionText = it.title || captionFromCard || it.alt || '';
+        lbCaption.textContent = captionText;
 
-  function openImage(src, alt){
-    lbImg.src = src; lbImg.alt = alt || '';
-    lb.classList.add('show'); lb.setAttribute('aria-hidden','false');
-    lbClose.focus(); document.body.style.overflow = 'hidden';
-  }
-  function closeImage(){ lb.classList.remove('show'); lb.setAttribute('aria-hidden','true'); lbImg.src=''; document.body.style.overflow=''; }
+        // store focus for restore
+        lastActiveElement = document.activeElement;
 
-  $$('.gallery-card').forEach(card => {
-    const img = card.querySelector('img');
-    card.addEventListener('click', () => openImage(img.src, img.alt));
-    card.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openImage(img.src, img.alt); } });
-    card.tabIndex = 0; // make focusable
-  });
+        // show modal
+        lb.classList.add('show');
+        lb.setAttribute('aria-hidden', 'false');
+        lb.setAttribute('aria-modal', 'true');
+        lb.setAttribute('role', 'dialog');
+        document.body.style.overflow = 'hidden';
 
-  lbClose.addEventListener('click', closeImage);
-  lb.addEventListener('click', e => { if(e.target === lb) closeImage(); });
-  document.addEventListener('keydown', e => { if(e.key === 'Escape' && lb.classList.contains('show')) closeImage(); });
+        // focus management: move focus to close button
+        const focusables = getFocusable(lb);
+        (lbClose || focusables[0])?.focus();
+      }
 
-  /* ---------- video lightbox ---------- */
-  const vCard = $('#video-card');
-  const vLb = $('#video-lightbox');
-  const vIframe = $('#video-iframe');
-  const vClose = $('#close-video');
-  const baseSrc = vIframe ? vIframe.src : '';
+      function closeImage() {
+        lb.classList.remove('show');
+        lb.setAttribute('aria-hidden', 'true');
+        lb.removeAttribute('aria-modal');
+        lb.removeAttribute('role');
+        lbImg.src = '';
+        document.body.style.overflow = '';
 
-  function openVideo(){
-    vLb.classList.add('show'); vLb.setAttribute('aria-hidden','false');
-    // append autoplay flag
-    if(vIframe && vIframe.src.indexOf('autoplay=1') === -1){ vIframe.src = baseSrc + (baseSrc.indexOf('?') === -1 ? '?' : '&') + 'autoplay=1'; }
-    vClose.focus(); document.body.style.overflow='hidden';
-  }
-  function closeVideo(){ vLb.classList.remove('show'); vLb.setAttribute('aria-hidden','true'); if(vIframe) vIframe.src=''; setTimeout(()=> vIframe.src = baseSrc, 300); document.body.style.overflow=''; vCard.focus(); }
+        // restore focus to the element that opened the modal
+        try { if (lastActiveElement && typeof lastActiveElement.focus === 'function') lastActiveElement.focus(); } catch (e) { }
+      }
 
-  if(vCard){ vCard.addEventListener('click', openVideo); vCard.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openVideo(); } }); }
-  if(vClose) vClose.addEventListener('click', closeVideo);
-  if(vLb) vLb.addEventListener('click', e => { if(e.target === vLb) closeVideo(); });
-  document.addEventListener('keydown', e => { if(e.key === 'Escape' && vLb.classList.contains('show')) closeVideo(); });
+      function showNext() { if (galleryItems.length === 0) return; openImageAt((currentIndex + 1) % galleryItems.length); }
+      function showPrev() { if (galleryItems.length === 0) return; openImageAt((currentIndex - 1 + galleryItems.length) % galleryItems.length); }
 
-  /* ---------- gallery search (client-side) ---------- */
-  const searchInput = $('#gallery-search');
-  const clearBtn = $('#gallery-clear');
-  const cards = Array.from(document.querySelectorAll('.gallery-card'));
+      // Controls
+      if (lbNext) lbNext.addEventListener('click', showNext);
+      if (lbPrev) lbPrev.addEventListener('click', showPrev);
+      if (lbClose) lbClose.addEventListener('click', closeImage);
 
-  function filterGallery(q){
-    const term = (q || '').trim().toLowerCase();
-    cards.forEach(c => { const t = (c.dataset.title||c.textContent).toLowerCase(); c.style.display = (!term || t.includes(term)) ? '' : 'none'; });
-  }
-  if(searchInput){ searchInput.addEventListener('input', e => filterGallery(e.target.value)); }
-  if(clearBtn){ clearBtn.addEventListener('click', () => { if(searchInput){ searchInput.value=''; searchInput.focus(); } filterGallery(''); }); }
+      // backdrop click closes
+      lb.addEventListener('click', e => { if (e.target === lb) closeImage(); });
 
-})();
-</script>
+      // keyboard handlers: Escape, arrows, and Tab focus trap
+      document.addEventListener('keydown', e => {
+        if (!lb.classList.contains('show')) return;
+        if (e.key === 'Escape') { e.preventDefault(); closeImage(); return; }
+        if (e.key === 'ArrowRight') { e.preventDefault(); showNext(); return; }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); showPrev(); return; }
+
+        if (e.key === 'Tab') {
+          // focus trap inside lightbox
+          const focusables = getFocusable(lb);
+          if (focusables.length === 0) { e.preventDefault(); return; }
+          const first = focusables[0];
+          const last = focusables[focusables.length - 1];
+          if (e.shiftKey) { if (document.activeElement === first) { e.preventDefault(); last.focus(); } }
+          else { if (document.activeElement === last) { e.preventDefault(); first.focus(); } }
+        }
+      });
+
+      /* ---------- video lightbox ---------- */
+      const vCard = $('#video-card');
+      const vLb = $('#video-lightbox');
+      const vIframe = $('#video-iframe');
+      const vClose = $('#close-video');
+      const baseSrc = vIframe ? vIframe.src : '';
+
+      function openVideo() {
+        // if iframe not yet injected, build it from data-video-id
+        if (vIframe && !vIframe.src) {
+          const videoId = vCard.getAttribute('data-video-id');
+          const src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1`;
+          vIframe.src = src;
+        }
+        vLb.classList.add('show'); vLb.setAttribute('aria-hidden', 'false');
+        vClose.focus(); document.body.style.overflow = 'hidden';
+      }
+      function closeVideo() { vLb.classList.remove('show'); vLb.setAttribute('aria-hidden', 'true'); if (vIframe) vIframe.src = ''; setTimeout(() => vIframe.src = baseSrc, 300); document.body.style.overflow = ''; vCard.focus(); }
+
+      if (vCard) { vCard.addEventListener('click', openVideo); vCard.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openVideo(); } }); }
+      if (vClose) vClose.addEventListener('click', closeVideo);
+      if (vLb) vLb.addEventListener('click', e => { if (e.target === vLb) closeVideo(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape' && vLb.classList.contains('show')) closeVideo(); });
+
+      /* ---------- generic media card handler (images & videos) ---------- */
+      $$('.card-media').forEach(card => {
+        const vid = card.dataset.videoId;
+        const img = card.querySelector('img');
+        if (vid) {
+          card.addEventListener('click', () => {
+            // open video lightbox using video id
+            const src = `https://www.youtube.com/embed/${vid}?rel=0&autoplay=1`;
+            if (vIframe) vIframe.src = src;
+            if (vLb) { vLb.classList.add('show'); vLb.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; }
+          });
+          card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); } });
+        } else if (img) {
+          card.addEventListener('click', () => {
+            // open image lightbox using the existing gallery functions
+            const idx = galleryItems.findIndex(it => it.src === (img.currentSrc || img.src));
+            if (idx >= 0) openImageAt(idx);
+            else {
+              // fallback: set image directly
+              lbImg.src = img.currentSrc || img.src; lbImg.alt = img.alt || '';
+              lbCaption.textContent = card.dataset.title || img.alt || '';
+              lb.classList.add('show'); lb.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; lbClose.focus();
+            }
+          });
+          card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); } });
+        }
+      });
+
+      /* ---------- gallery search (client-side) ---------- */
+      const searchInput = $('#gallery-search');
+      const clearBtn = $('#gallery-clear');
+      // global card selection (gallery, info, generic cards)
+      const cards = Array.from(document.querySelectorAll('.gallery-card, .info-card, .card'));
+
+      // normalize function removes accents for comparison
+      function normalizeText(s) { return (s || '').normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase(); }
+
+      function filterGallery(q) {
+        const raw = (q || '').trim();
+        const term = normalizeText(raw);
+        let matches = 0;
+        cards.forEach(c => {
+          const combined = ((c.dataset.title || '') + ' ' + (c.querySelector('.gallery-caption')?.textContent || '') + ' ' + (c.querySelector('.card-body')?.textContent || '') + ' ' + c.textContent);
+          const text = normalizeText(combined);
+          const visible = (!term || text.includes(term));
+          c.style.display = visible ? '' : 'none';
+          c.classList.toggle('result-highlight', visible && term.length > 0);
+          if (visible && term.length > 0) matches++;
+        });
+        const countEl = $('#search-count'); if (countEl) countEl.textContent = term ? `${matches} resultado(s)` : '';
+      }
+      if (searchInput) { searchInput.addEventListener('input', e => filterGallery(e.target.value)); }
+      if (clearBtn) { clearBtn.addEventListener('click', () => { if (searchInput) { searchInput.value = ''; searchInput.focus(); } filterGallery(''); }); }
+
+      /* ---------- PWA: register service worker ---------- */
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('sw.js').then(() => console.log('SW registrado')).catch(() => console.warn('SW falhou'));
+        });
+      }
+
+      /* ---------- Favoritos (localStorage) ---------- */
+      const favKey = 'biblia.favorites';
+      const favorites = new Set(JSON.parse(localStorage.getItem(favKey) || '[]'));
+
+      function syncFavButtons() {
+        document.querySelectorAll('.info-card, .gallery-card').forEach(card => {
+          if (card.querySelector('.fav-btn')) return;
+          const id = card.dataset.title || card.querySelector('img')?.alt || '';
+          const btn = document.createElement('button'); btn.className = 'fav-btn'; btn.innerHTML = '❤'; btn.title = 'Favoritar';
+          if (favorites.has(id)) btn.classList.add('active');
+          btn.addEventListener('click', e => { e.stopPropagation(); if (favorites.has(id)) { favorites.delete(id); btn.classList.remove('active'); } else { favorites.add(id); btn.classList.add('active'); } localStorage.setItem(favKey, JSON.stringify(Array.from(favorites))); });
+          card.style.position = 'relative'; card.appendChild(btn);
+        });
+      }
+      syncFavButtons();
+
+      /* ---------- lazy load images with IntersectionObserver ---------- */
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const img = entry.target.querySelector('img');
+          if (img && img.dataset.src) { img.src = img.dataset.src; img.classList.remove('placeholder'); }
+          io.unobserve(entry.target);
+        });
+      }, { rootMargin: '200px' });
+
+      document.querySelectorAll('.info-card, .gallery-card').forEach(el => {
+        // mark placeholders if needed
+        const img = el.querySelector('img');
+        if (img && !img.src) { img.classList.add('placeholder'); }
+        io.observe(el);
+      });
+
+      /* ---------- tilt interaction for cards ---------- */
+      function bindTilt(el) {
+        el.classList.add('tilt');
+        el.addEventListener('mousemove', e => {
+          const rect = el.getBoundingClientRect();
+          const x = e.clientX - rect.left; const y = e.clientY - rect.top;
+          const cx = rect.width / 2; const cy = rect.height / 2;
+          const dx = (x - cx) / cx; const dy = (y - cy) / cy;
+          const rx = -dy * 6; const ry = dx * 6;
+          el.style.transform = `perspective(600px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+        });
+        el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+      }
+      document.querySelectorAll('.gallery-card, .info-card').forEach(bindTilt);
+
+      /* ---------- Temas Avançados (adicionados dinamicamente) ---------- */
+      const temasSection = document.createElement('section'); temasSection.id = 'temas-avancados'; temasSection.className = 'fade-in bg-white';
+      temasSection.innerHTML = `<div class="container py-5"><h2 class="mb-4 text-center">Temas Avançados</h2><div class="gallery-grid">
+    <article class="gallery-card card-led" data-title="Teologia" data-detail="Teologia investiga a natureza de Deus e a relação entre divino e humano." tabindex="0"><img src="Images/Belem.jpeg" alt="Teologia"><div class="gallery-caption">Teologia — estudo dos atributos divinos</div></article>
+    <article class="gallery-card card-led" data-title="Escatologia" data-detail="Escatologia foca nas doutrinas sobre o fim dos tempos e esperança escatológica." tabindex="0"><img src="Images/Jerusalem.jpg" alt="Escatologia"><div class="gallery-caption">Escatologia — estudos sobre fim dos tempos</div></article>
+    <article class="gallery-card card-led" data-title="Hermeneutica" data-detail="Hermenêutica trata dos métodos de interpretação dos textos sagrados." tabindex="0"><img src="Images/Cafarnaum.jpg" alt="Hermeneutica"><div class="gallery-caption">Hermenêutica — interpretação dos textos</div></article>
+    <article class="gallery-card card-led" data-title="Práticas" data-detail="Práticas religiosas e rituais que moldam a vivência comunitária e a experiência de fé." tabindex="0"><img src="Images/mar-da-galileia.jpg" alt="Práticas"><div class="gallery-caption">Práticas — rituais e tradições</div></article>
+  </div></div>`;
+      // insert before footer
+      const footer = document.getElementById('rodape'); footer.parentNode.insertBefore(temasSection, footer);
+      // re-bind behaviors on the newly added cards
+      temasSection.querySelectorAll('.gallery-card').forEach(c => { c.tabIndex = 0; c.addEventListener('click', () => { const img = c.querySelector('img'); const idx = galleryItems.findIndex(it => it.src === (img.currentSrc || img.src)); if (idx >= 0) openImageAt(idx); else { lbImg.src = img.src; lbCaption.textContent = c.dataset.title || img.alt || ''; lb.classList.add('show'); lb.setAttribute('aria-hidden', 'false'); lbClose.focus(); document.body.style.overflow = 'hidden'; } }); bindTilt(c); });
+
+      /* ---------- Leia mais (detail modal) ---------- */
+      const detailModal = $('#detail-modal');
+      const detailTitle = $('#detail-title');
+      const detailBody = $('#detail-body');
+      const detailClose = $('#detail-close');
+
+      function openDetail(title, body) {
+        detailTitle.textContent = title || '';
+        detailBody.textContent = body || '';
+        // populate a sensible source (Wikipedia search) quando não houver fonte explícita
+        const sourceLink = $('#detail-source');
+        if (sourceLink) {
+          const q = encodeURIComponent(title || body.substring(0, 40));
+          sourceLink.href = `https://pt.wikipedia.org/w/index.php?search=${q}`;
+        }
+        detailModal.classList.add('show'); detailModal.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; detailClose.focus();
+      }
+      function closeDetail() { detailModal.classList.remove('show'); detailModal.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; }
+
+      document.querySelectorAll('.gallery-card, .info-card').forEach(card => {
+        const detail = card.dataset.detail;
+        if (detail) {
+          const btn = document.createElement('button'); btn.className = 'btn btn-sm btn-outline-light mt-2'; btn.textContent = 'Leia mais';
+          btn.addEventListener('click', e => { e.stopPropagation(); openDetail(card.dataset.title || '', detail); });
+          const caption = card.querySelector('.gallery-caption') || card.querySelector('.card-body');
+          if (caption) caption.parentNode.appendChild(btn);
+        }
+      });
+
+      if (detailClose) detailClose.addEventListener('click', closeDetail);
+      if (detailModal) detailModal.addEventListener('click', e => { if (e.target === detailModal) closeDetail(); });
+
+      /* ---------- auto-generate short details for cards lacking data-detail ---------- */
+      document.querySelectorAll('.gallery-card, .info-card, .card').forEach(card => {
+        if (!card.dataset.detail) {
+          const title = card.dataset.title || card.querySelector('img')?.alt || card.querySelector('.card-body h5')?.textContent || '';
+          if (title) {
+            card.dataset.detail = `${title}: resumo introdutório sobre o tema para leitura rápida.`;
+          }
+        }
+      });
+
+
+
+      /* ---------- side index (quick links) ---------- */
+      // removed dynamic side-index per user request
+
+    })();
+  </script>
+
+  <script>
+    // Toast helper
+    function showToast(message, ms = 2800) {
+      const container = document.getElementById('toasts');
+      if (!container) {
+        // fallback: create a quick transient toast container
+        const c = document.createElement('div'); c.style.position = 'fixed'; c.style.right = '18px'; c.style.top = '18px'; c.style.zIndex = 2000; document.body.appendChild(c);
+        const t2 = document.createElement('div'); t2.className = 'toast'; t2.textContent = message; c.appendChild(t2); requestAnimationFrame(() => t2.classList.add('toast-show'));
+        setTimeout(() => { t2.classList.remove('toast-show'); t2.classList.add('toast-hide'); t2.addEventListener('animationend', () => { t2.remove(); c.remove(); }); }, ms);
+        return;
+      }
+      const t = document.createElement('div'); t.className = 'toast'; t.textContent = message; container.appendChild(t);
+      requestAnimationFrame(() => t.classList.add('toast-show'));
+      setTimeout(() => { t.classList.remove('toast-show'); t.classList.add('toast-hide'); t.addEventListener('animationend', () => t.remove()); }, ms);
+    }
+
+    // Import favorites (file input)
+    const importBtn = document.getElementById('import-favs');
+    const importInput = document.getElementById('import-favs-input');
+    if (importBtn && importInput) {
+      importBtn.addEventListener('click', () => importInput.click());
+      importInput.addEventListener('change', e => {
+        const f = e.target.files && e.target.files[0]; if (!f) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+          try {
+            const parsed = JSON.parse(reader.result);
+            // allow both {items:[]} shape or direct array
+            const items = Array.isArray(parsed) ? parsed : (Array.isArray(parsed.items) ? parsed.items : null);
+            if (!items) { showToast('Arquivo inválido: esperando um array de favoritos.'); return; }
+            const key = 'biblia.favorites';
+            const existing = new Set(JSON.parse(localStorage.getItem(key) || '[]'));
+            items.forEach(it => existing.add(it));
+            localStorage.setItem(key, JSON.stringify(Array.from(existing)));
+            // re-sync UI (recreate fav buttons)
+            document.querySelectorAll('.fav-btn').forEach(b => b.remove());
+            try { syncFavButtons(); } catch (e) { /* noop */ }
+            showToast('Favoritos importados com sucesso.');
+          } catch (err) { showToast('Erro ao ler o arquivo: formato inválido.'); }
+        };
+        reader.readAsText(f);
+        importInput.value = '';
+      });
+    }
+  </script>
 </body>
+
 </html>

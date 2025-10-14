@@ -1,0 +1,11 @@
+{
+  "name": "Conheça a Bíblia",
+  "short_name": "Bíblia",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0f0f10",
+  "theme_color": "#f9d342",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
